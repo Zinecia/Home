@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Prime Video Mobile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-black text-white w-screen h-screen overflow-hidden">
+  <div class="w-full h-full bg-[#0F0F0F] flex flex-col overflow-hidden relative">
+
+    <!-- Top bar -->
+    <div class="px-4 pt-6 pb-3 space-y-3">
+      <div class="flex items-center justify-between">
+      <div class="h-6 w-auto">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Mi Logo" class="h-full object-contain"/>
+</div>
+        <a href="https://cuentaappcreator.github.io/Buscador/"><button aria-label="Search" onclick="https://cuentaappcreator.github.io/Buscador/" class="text-white text-lg">
+          <i class="fas fa-search"></i>
+        </button></a>
+      </div>
+
+      <!-- Menu -->
+      <div class="flex overflow-x-auto md:overflow-visible space-x-3 scrollbar-hide text-xs font-semibold text-white">
+        <a href="#movies" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Movies</a>
+        <a href="#tvshows" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">TV Shows</a>
+        <a href="#sports" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Sports</a>
+        <a href="#livetv" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Live TV</a>
+        <a href="#kids" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0 hidden md:inline">Kids</a>
+        <a href="#docs" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0 hidden md:inline">Documentaries</a>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 overflow-y-auto px-4 space-y-6 pb-24">
+      <!-- Hero banner -->
+      <div class="space-y-2">
+        <h2 class="text-white font-semibold text-base">Estrenos Populares:</h2>
+        <div class="relative overflow-hidden w-full">
+          <div id="heroContainer" class="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
+            <!-- Banner 1 -->
+            <a href="go:29" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
+              <img src="https://image.tmdb.org/t/p/original/sTQRPIaPNVc423i3K1yhCuntTTz.jpg" alt="Rings of Power" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Destino final 6: Lazos de sangre  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+  TOP: #1</span>
+</div>
+            </a>
+            <!-- Banner 2 -->
+            <a href="go:31" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
+              <img src="https://image.tmdb.org/t/p/original/3lvXenG7eb2f2akfxwIp9HhniKc.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Misión: Imposible - Sentencia final  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+TOP: #2  
+</span></div>
+            </a>
+			
+			            <!-- Banner 2 -->
+            <a href="go:30" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
+              <img src="https://image.tmdb.org/t/p/original/3Ym8diDGcHqtsTSo53xwiWJk38U.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Thunderbolts*  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+TOP: #3  
+</span></div>
+            </a>
+			
+			            <!-- Banner 2 -->
+            <a href="go:32" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
+              <img src="https://image.tmdb.org/t/p/original/k6PPdj6VWa02NQ8QEVm1QpuKyTU.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Extraterritorial  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+ TOP: #4
+</span></div>
+            </a>
+			
+			            <!-- Banner 2 -->
+            <a href="go:33" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
+              <img src="https://image.tmdb.org/t/p/original/5WA5sAwrQUV7TRX9OO2Nbhxu3Pu.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5"> Una película de Minecraft <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+ TOP: #5
+</span></div>
+            </a>
+			
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Prime Movies -->
+      <div id="movies">
+        <h2 class="text-white font-semibold text-base mb-3">Entretenimiento:</h2>
+        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+          <a href="go:marvel" class="flex-shrink-0 w-[180px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTZYKFMflerJrJ4M4sEuQfY2pINsNK2npTlxunr7_dCJEFiVfOiTPwneiMIJ_HGSS5Y7wEhsg_dIR-At97s7_ckis7LgsY9StkGcfXSYVG61BnTUODKoOPgVMHw3nNMID9e7Ob6_FxrbFn08IMSP3Qks76A9-9WcUrZZ3XqG6wj484cubVINi6W9mWhLe4/s1930/marvel-logo-wallpaper.webp" alt="Movie 1" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
+           <center> <p class="text-white text-sm mt-1 truncate">Marvel</p></center>
+          </a>
+          <a href="go:dc" class="flex-shrink-0 w-[180px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgxRAfwZXC5a6yv14A-wb8qzkUQNkqaWmVu9F0Zivb1NVMrS4WKQdiTEua8riz-9ZkcaxFVeIJ5CrxHp7es8WJXv0oRuYoljwRxDNzrCuiR5C5Mu3DpWgpOxAekYzwpBYPHVBhLtYtPtzSDhr_IQBpRHuBE0C98-Qjpq5lqAluDqQWjNOAz5DU3C8RNzC0/s1140/dc-all-in-featured-image%20%281%29.png" alt="Movie 2" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
+           <center> <p class="text-white text-sm mt-1 truncate">DC Comics</p></center>
+          </a>
+		  <a href="go:navidad" class="flex-shrink-0 w-[180px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT2beyVn31m4cjspGMZR5VyLHVn0WwOX6TJZpnew2bz-df7Y7oSWwDBi44tIF77tc7vJ1wD2DBmSw74cd_hTdWEsXXOAPZ3dHEl4cdN0Pvpd9uKTl1grij_738l3euodBsLQAk4yC0_f_69lSkdIEsoQsfSnjY9ww82juTT_zKp3u8luA6MCrvbmZ_nCnO/s2800/navidad-f.webp" alt="Movie 1" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
+         <center>   <p class="text-white text-sm mt-1 truncate">Navidad</p></center>
+          </a>
+          <a href="go:cc" class="flex-shrink-0 w-[180px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsRQ-qo72xpilONzsCvejVHSvfwBmmkr_0PmclTlZQpE3wJq5_8_uBWzV2DgkI1d1AFbQt8sp5MMgCjX0G4PqvshrEV_6XxqJXmwabeMk3uNBbELArn6RJwCrpDzNuhgOxQtPJXn5A-3PTQw98NxavUlXjaUQl_g0MtBaPyeOTDJC_QqQYhElW9MoUhDNt/s1536/ChatGPT%20Image%2023%20may%202025,%2017_19_05.png" alt="Movie 2" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
+         <center>   <p class="text-white text-sm mt-1 truncate">Cine Cristiano</p></center>
+          </a>
+          <a href="go:dw" class="flex-shrink-0 w-[180px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieLvsZMLx1akBR1hqu3dpMl454pQVC47uIwOENu93VP0m_MF_ZCbcI1vWcljKRx-bfcqMHW6js2Y1bLmdvFW_uCftVRD_ZtciYnwCPWHqocoeOJYruUVuhPhkRrRuco-R93NPOM6A614vNuOcwhWia4f0aDBZTseW_rjUyDGaUjg6wMyzkiPOi1nsTet-0/s1280/maxresdefault.jpg" alt="Movie 2" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
+           <center> <p class="text-white text-sm mt-1 truncate">DreamWork</p></center>
+          </a>
+		  
+        </div>
+      </div>
+
+      <!-- EXTRENOS -->
+      <div id="tvshows">
+        <h2 class="text-white font-semibold text-base mb-3">Estrenos</h2>
+        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+		
+		<!--SUBIR ESTRENO-->
+		
+          <a href="go:34" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/fDdyEJeX0b4CiZBlSuh2oqHAb2f.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">El Eternauta </p>
+          </a>
+          <a href="go:35" class="flex-shrink-0 w-[120px]">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cYtAU7GtSEoBD9EuS311RCNTb6K.jpg" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Violet y Finch</p>
+          </a>
+          <a href="go:36" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivZU91UZcW40mgPaUsp4zaoHmdZA03RwE40qkfRt60x9_mZG593Rp2SRHVpQTm7CNqqePFfyIWRmEOHWqc0yoE7piRrZO4ftxJKGaYknOy-flu1ZbHQVgkF3b4SqV0eZcNEmLXF1LeedU3dJ3y_mzwXkEYtgW3spXQ5CwYEbA7R4vJjk0VUiwNWhCVYkZ7/s630/Reh%C3%A9n_-_Poster.webp" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">iRehén </p>
+          </a>
+		    <a href="go:37" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/1P7WhU6xUHhG5B1oCuma1377XZd.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Sangre y oro</p>
+          </a>
+          <a href="go:38" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmRQWHa812ETrMi5-pUM_wK_3BJWWtfeiITXnQRa6ySpU4zggSgj_kFk-ldW8qa5ub7Pq28P0n2U9-ALuD-sobHMNrHbeXEOPf-uofbGIdLx0rj7ao-g927z8WkW_Y1wCJoPksfHyIPtX7tOcR5HxfqX4hVJhpaVVB0QMX1y2TOvShHknWbflWST-bsJP/s360/La_rosa_de_Versalles_-_Poster.webp" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">La rosa de Versalles</p>
+          </a>
+          <a href="go:netflix" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Ver Más...</p>
+          </a>
+        </div>
+      </div>
+	  
+	 
+	   <div id="tvshows">
+        <h2 class="text-white font-semibold text-base mb-3">Acción</h2>
+        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+		<!--SUBIR ACCION-->
+		
+          <a href="go:34" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/fDdyEJeX0b4CiZBlSuh2oqHAb2f.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">El Eternauta </p>
+          </a>
+          <a href="go:35" class="flex-shrink-0 w-[120px]">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cYtAU7GtSEoBD9EuS311RCNTb6K.jpg" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Violet y Finch</p>
+          </a>
+          <a href="go:36" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivZU91UZcW40mgPaUsp4zaoHmdZA03RwE40qkfRt60x9_mZG593Rp2SRHVpQTm7CNqqePFfyIWRmEOHWqc0yoE7piRrZO4ftxJKGaYknOy-flu1ZbHQVgkF3b4SqV0eZcNEmLXF1LeedU3dJ3y_mzwXkEYtgW3spXQ5CwYEbA7R4vJjk0VUiwNWhCVYkZ7/s630/Reh%C3%A9n_-_Poster.webp" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">iRehén </p>
+          </a>
+		    <a href="go:37" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/1P7WhU6xUHhG5B1oCuma1377XZd.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Sangre y oro</p>
+          </a>
+          <a href="go:38" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmRQWHa812ETrMi5-pUM_wK_3BJWWtfeiITXnQRa6ySpU4zggSgj_kFk-ldW8qa5ub7Pq28P0n2U9-ALuD-sobHMNrHbeXEOPf-uofbGIdLx0rj7ao-g927z8WkW_Y1wCJoPksfHyIPtX7tOcR5HxfqX4hVJhpaVVB0QMX1y2TOvShHknWbflWST-bsJP/s360/La_rosa_de_Versalles_-_Poster.webp" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">La rosa de Versalles</p>
+          </a>
+          <a href="https://cuentaappcreator.github.io/Label-Accion/" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Ver Más...</p>
+          </a>
+        </div>
+      </div>
+		  
+		  <div id="tvshows">
+        <h2 class="text-white font-semibold text-base mb-3">Comedia</h2>
+        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+		<!--SUBIR COMEDIA-->
+		
+          <a href="go:34" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/fDdyEJeX0b4CiZBlSuh2oqHAb2f.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">El Eternauta </p>
+          </a>
+          <a href="go:35" class="flex-shrink-0 w-[120px]">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cYtAU7GtSEoBD9EuS311RCNTb6K.jpg" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Violet y Finch</p>
+          </a>
+          <a href="go:36" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivZU91UZcW40mgPaUsp4zaoHmdZA03RwE40qkfRt60x9_mZG593Rp2SRHVpQTm7CNqqePFfyIWRmEOHWqc0yoE7piRrZO4ftxJKGaYknOy-flu1ZbHQVgkF3b4SqV0eZcNEmLXF1LeedU3dJ3y_mzwXkEYtgW3spXQ5CwYEbA7R4vJjk0VUiwNWhCVYkZ7/s630/Reh%C3%A9n_-_Poster.webp" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">iRehén </p>
+          </a>
+		    <a href="go:37" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/1P7WhU6xUHhG5B1oCuma1377XZd.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Sangre y oro</p>
+          </a>
+          <a href="go:38" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmRQWHa812ETrMi5-pUM_wK_3BJWWtfeiITXnQRa6ySpU4zggSgj_kFk-ldW8qa5ub7Pq28P0n2U9-ALuD-sobHMNrHbeXEOPf-uofbGIdLx0rj7ao-g927z8WkW_Y1wCJoPksfHyIPtX7tOcR5HxfqX4hVJhpaVVB0QMX1y2TOvShHknWbflWST-bsJP/s360/La_rosa_de_Versalles_-_Poster.webp" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">La rosa de Versalles</p>
+          </a>
+          <a href="go:netflix" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Ver Más...</p>
+          </a>
+        </div>
+      </div>
+	  
+	  <div id="tvshows">
+        <h2 class="text-white font-semibold text-base mb-3">Animación</h2>
+        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+		<!--SUBIR ANIMACION-->
+		
+          <a href="go:34" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/fDdyEJeX0b4CiZBlSuh2oqHAb2f.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">El Eternauta </p>
+          </a>
+          <a href="go:35" class="flex-shrink-0 w-[120px]">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cYtAU7GtSEoBD9EuS311RCNTb6K.jpg" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Violet y Finch</p>
+          </a>
+          <a href="go:36" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivZU91UZcW40mgPaUsp4zaoHmdZA03RwE40qkfRt60x9_mZG593Rp2SRHVpQTm7CNqqePFfyIWRmEOHWqc0yoE7piRrZO4ftxJKGaYknOy-flu1ZbHQVgkF3b4SqV0eZcNEmLXF1LeedU3dJ3y_mzwXkEYtgW3spXQ5CwYEbA7R4vJjk0VUiwNWhCVYkZ7/s630/Reh%C3%A9n_-_Poster.webp" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">iRehén </p>
+          </a>
+		    <a href="go:37" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/1P7WhU6xUHhG5B1oCuma1377XZd.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Sangre y oro</p>
+          </a>
+          <a href="go:38" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmRQWHa812ETrMi5-pUM_wK_3BJWWtfeiITXnQRa6ySpU4zggSgj_kFk-ldW8qa5ub7Pq28P0n2U9-ALuD-sobHMNrHbeXEOPf-uofbGIdLx0rj7ao-g927z8WkW_Y1wCJoPksfHyIPtX7tOcR5HxfqX4hVJhpaVVB0QMX1y2TOvShHknWbflWST-bsJP/s360/La_rosa_de_Versalles_-_Poster.webp" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">La rosa de Versalles</p>
+          </a>
+          <a href="go:netflix" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Ver Más...</p>
+          </a>
+        </div>
+      </div>
+	  
+	  <div id="tvshows">
+        <h2 class="text-white font-semibold text-base mb-3">Romance</h2>
+	 <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+	 <!--SUBIR ROMANCE-->
+	 
+          <a href="go:34" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/fDdyEJeX0b4CiZBlSuh2oqHAb2f.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">El Eternauta </p>
+          </a>
+          <a href="go:35" class="flex-shrink-0 w-[120px]">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cYtAU7GtSEoBD9EuS311RCNTb6K.jpg" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Violet y Finch</p>
+          </a>
+          <a href="go:36" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivZU91UZcW40mgPaUsp4zaoHmdZA03RwE40qkfRt60x9_mZG593Rp2SRHVpQTm7CNqqePFfyIWRmEOHWqc0yoE7piRrZO4ftxJKGaYknOy-flu1ZbHQVgkF3b4SqV0eZcNEmLXF1LeedU3dJ3y_mzwXkEYtgW3spXQ5CwYEbA7R4vJjk0VUiwNWhCVYkZ7/s630/Reh%C3%A9n_-_Poster.webp" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">iRehén </p>
+          </a>
+		    <a href="go:37" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/1P7WhU6xUHhG5B1oCuma1377XZd.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Sangre y oro</p>
+          </a>
+          <a href="go:38" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmRQWHa812ETrMi5-pUM_wK_3BJWWtfeiITXnQRa6ySpU4zggSgj_kFk-ldW8qa5ub7Pq28P0n2U9-ALuD-sobHMNrHbeXEOPf-uofbGIdLx0rj7ao-g927z8WkW_Y1wCJoPksfHyIPtX7tOcR5HxfqX4hVJhpaVVB0QMX1y2TOvShHknWbflWST-bsJP/s360/La_rosa_de_Versalles_-_Poster.webp" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">La rosa de Versalles</p>
+          </a>
+          <a href="go:netflix" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Ver Más...</p>
+          </a>
+        </div>
+      </div>
+	  
+	  <div id="tvshows">
+	  <h2 class="text-white font-semibold text-base mb-3">Terror</h2>
+ <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
+          <!--SUBIR TERROR-->
+
+		  <a href="go:34" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/fDdyEJeX0b4CiZBlSuh2oqHAb2f.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">El Eternauta </p>
+          </a>
+          <a href="go:35" class="flex-shrink-0 w-[120px]">
+            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cYtAU7GtSEoBD9EuS311RCNTb6K.jpg" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Violet y Finch</p>
+          </a>
+          <a href="go:36" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivZU91UZcW40mgPaUsp4zaoHmdZA03RwE40qkfRt60x9_mZG593Rp2SRHVpQTm7CNqqePFfyIWRmEOHWqc0yoE7piRrZO4ftxJKGaYknOy-flu1ZbHQVgkF3b4SqV0eZcNEmLXF1LeedU3dJ3y_mzwXkEYtgW3spXQ5CwYEbA7R4vJjk0VUiwNWhCVYkZ7/s630/Reh%C3%A9n_-_Poster.webp" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">iRehén </p>
+          </a>
+		    <a href="go:37" class="flex-shrink-0 w-[120px]">
+            <img src="https://image.tmdb.org/t/p/original/1P7WhU6xUHhG5B1oCuma1377XZd.jpg" alt="Original 1" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Sangre y oro</p>
+          </a>
+          <a href="go:38" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmRQWHa812ETrMi5-pUM_wK_3BJWWtfeiITXnQRa6ySpU4zggSgj_kFk-ldW8qa5ub7Pq28P0n2U9-ALuD-sobHMNrHbeXEOPf-uofbGIdLx0rj7ao-g927z8WkW_Y1wCJoPksfHyIPtX7tOcR5HxfqX4hVJhpaVVB0QMX1y2TOvShHknWbflWST-bsJP/s360/La_rosa_de_Versalles_-_Poster.webp" alt="Original 2" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">La rosa de Versalles</p>
+          </a>
+          <a href="go:netflix" class="flex-shrink-0 w-[120px]">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+            <p class="text-white text-sm mt-1 truncate">Ver Más...</p>
+          </a>
+        </div>
+      </div>
+		  
+		  
+		  
+		  
+        </div>
+      
+    </div>
+
+    <!-- Bottom navigation -->
+<nav class="fixed bottom-0 left-0 w-full bg-[#1E1E1E] flex justify-around items-center py-3 rounded-b-3xl text-white text-xs font-semibold z-50">
+  <a href="https://cuentaappcreator.github.io/Home/" class="flex flex-col items-center space-y-1">
+    <i class="fas fa-home text-xl"></i><span>Inicio</span>
+  </a>
+  <a href="https://cuentaappcreator.github.io/streaming/" class="flex flex-col items-center space-y-1">
+    <i class="fas fa-th-large text-xl"></i><span>Streaming</span>
+  </a>
+  <a href="https://zinecia.github.io/Favoritos/" class="flex flex-col items-center space-y-1">
+    <i class="fas fa-heart text-xl"></i>Favoritos
+  </a>
+  <a href="https://zinecia.github.io/Buscador/" class="flex flex-col items-center space-y-1">
+    <i class="fas fa-search text-xl"></i><span>Buscar</span>
+  </a>
+</nav>
+
+  </div>
+
+  <script>
+    const container = document.getElementById("heroContainer");
+    const slides = container.children;
+    let index = 0;
+    let autoScrollTimer;
+
+    function scrollToSlide(i) {
+      const slideWidth = container.offsetWidth;
+      container.scrollTo({
+        left: slideWidth * i,
+        behavior: 'smooth'
+      });
+    }
+
+    function startAutoScroll() {
+      autoScrollTimer = setInterval(() => {
+        index = (index + 1) % slides.length;
+        scrollToSlide(index);
+      }, 5000);
+    }
+
+    function resetAutoScroll() {
+      clearInterval(autoScrollTimer);
+      startAutoScroll();
+    }
+
+    let isScrolling;
+    container.addEventListener('scroll', () => {
+      clearTimeout(isScrolling);
+      isScrolling = setTimeout(() => {
+        const scrollLeft = container.scrollLeft;
+        const slideWidth = container.offsetWidth;
+        index = Math.round(scrollLeft / slideWidth);
+        resetAutoScroll();
+      }, 150);
+    });
+
+    startAutoScroll();
+  </script>
+</body>
+</html>
