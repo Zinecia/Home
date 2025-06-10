@@ -61,7 +61,7 @@
             <!-- Banner 2 -->
             <a href="https://Zinecia.github.io/misionsentenciafinal/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
               <img src="https://image.tmdb.org/t/p/original/3lvXenG7eb2f2akfxwIp9HhniKc.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">MisiÃÂ³n: Imposible - Sentencia final  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Misiónn: Imposible - Sentencia final  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
 TOP: #2  
 </span></div>
             </a>
@@ -294,6 +294,58 @@ TOP: #3
       }
     }
   });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  function limpiarTextoRoto(texto) {
+    try {
+      let limpio = decodeURIComponent(escape(texto));
+      limpio = limpio.replace(/[^a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ¡!¿?.,:;()\[\]{}<>«»"'°\-\s]/g, "");
+      return limpio;
+    } catch (e) {
+      return texto;
+    }
+  }
+
+  function limpiarNodo(node) {
+    // Limpiar texto de nodos de texto
+    if (node.nodeType === 3) {
+      node.textContent = limpiarTextoRoto(node.textContent);
+    }
+
+    // Limpiar atributos de elementos HTML
+    if (node.nodeType === 1) {
+      const atributos = ["alt", "title", "placeholder", "aria-label"];
+      atributos.forEach(attr => {
+        if (node.hasAttribute(attr)) {
+          node.setAttribute(attr, limpiarTextoRoto(node.getAttribute(attr)));
+        }
+      });
+    }
+
+    // Recursividad para limpiar todo
+    node.childNodes.forEach(hijo => limpiarNodo(hijo));
+  }
+
+  // Limpieza inicial
+  limpiarNodo(document.body);
+
+  // Observador para cambios futuros (dinámicos)
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(nodo => {
+        limpiarNodo(nodo);
+      });
+    });
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+});
+
   </script>
 </body>
 </html>
