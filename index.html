@@ -61,7 +61,7 @@
             <!-- Banner 2 -->
             <a href="https://Zinecia.github.io/misionsentenciafinal/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
               <img src="https://image.tmdb.org/t/p/original/3lvXenG7eb2f2akfxwIp9HhniKc.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Misiónn: Imposible - Sentencia final  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">MisiÃ³nn: Imposible - Sentencia final  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
 TOP: #2  
 </span></div>
             </a>
@@ -171,6 +171,11 @@ TOP: #3
         <h2 class="text-white font-semibold text-base mb-3">Animacion</h2>
         <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
 		<!--SUBIR ANIMACION-->
+<a href="https://Zinecia.github.io/peli12/index.html" class="flex-shrink-0 w-[120px]">
+  <img src="https://image.tmdb.org/t/p/w500/3ALM0VeZjGUryAqWo6pqohzbLDh.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+  <p class="text-white text-sm mt-1 truncate">El cadáver de la novia</p>
+</a>
+
 <a href="https://Zinecia.github.io/puertasecret/index.html" class="flex-shrink-0 w-[120px]">
   <img src="https://image.tmdb.org/t/p/w500/xz1HjxeqpIACyPtJMqv33Z2RjRP.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
   <p class="text-white text-sm mt-1 truncate">Los mundos de Coraline</p>
@@ -178,7 +183,7 @@ TOP: #3
 
 <a href="https://Zinecia.github.io/tipsmalos/index.html" class="flex-shrink-0 w-[120px]">
   <img src="https://image.tmdb.org/t/p/w500/4njXv4s77hq9VGMOquvRQDiu53W.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Los tipos malos: Â¿Truco o atraco?</p>
+  <p class="text-white text-sm mt-1 truncate">Los tipos malos: ÃÂ¿Truco o atraco?</p>
 </a>
 
 		
@@ -283,10 +288,10 @@ TOP: #3
  document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector("#tvshows .flex");
 
-    // Seleccionamos todos los pÃÂ³steres, excluyendo el ÃÂºltimo (el "Ver MÃÂ¡s...")
+    // Seleccionamos todos los pÃÂÃÂ³steres, excluyendo el ÃÂÃÂºltimo (el "Ver MÃÂÃÂ¡s...")
     const allPosters = container.querySelectorAll("a:not(:last-child)");
 
-    // Si hay mÃÂ¡s de 10, eliminamos los mÃÂ¡s antiguos
+    // Si hay mÃÂÃÂ¡s de 10, eliminamos los mÃÂÃÂ¡s antiguos
     if (allPosters.length > 10) {
       const excess = allPosters.length - 10;
       for (let i = 0; i < excess; i++) {
@@ -300,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function limpiarTextoRoto(texto) {
     try {
       let limpio = decodeURIComponent(escape(texto));
-      limpio = limpio.replace(/[^a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ¡!¿?.,:;()\[\]{}<>«»"'°\-\s]/g, "");
+      limpio = limpio.replace(/[^a-zA-Z0-9Ã¡Ã©Ã­Ã³ÃºÃ¼Ã±ÃÃÃÃÃÃÃÂ¡!Â¿?.,:;()\[\]{}<>Â«Â»"'Â°\-\s]/g, "");
       return limpio;
     } catch (e) {
       return texto;
@@ -330,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Limpieza inicial
   limpiarNodo(document.body);
 
-  // Observador para cambios futuros (dinámicos)
+  // Observador para cambios futuros (dinÃ¡micos)
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(nodo => {
