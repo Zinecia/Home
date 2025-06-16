@@ -1,560 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>LzPlay Plus</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
-</head>
-<body class="bg-black text-white w-screen h-screen overflow-hidden">
-	
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const userAgent = navigator.userAgent;
-    const token = sessionStorage.getItem("lz_token");
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Series</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
-    const esAndroid = /Android/i.test(userAgent);
-    const esIOS = /iPhone|iPad|iPod/i.test(userAgent);
-    const esAppOriginal = /Vinebre/i.test(userAgent);
-    const esPC = !esAndroid && !esIOS;
-
-    if (esAndroid && !esAppOriginal) {
-      alert("Esta versión no es oficial. Por favor descarga la app oficial para acceder.");
-      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
-      return;
-    }
-
-    if (esAndroid && esAppOriginal && token !== "acceso_valido") {
-      alert("Acceso no autorizado. Inicia sesión desde la app.");
-      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
-      return;
-    }
-
-    if (esPC && token !== "clave_pc_valida") {
-      const clave = prompt("Ingresa la contraseña para acceder:");
-      if (clave === "TuClaveSegura") {
-        sessionStorage.setItem("lz_token", "clave_pc_valida");
-        alert("Acceso concedido desde PC.");
-      } else {
-        alert("Contraseña incorrecta.");
-        window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
-        return;
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #0f0f0f;
+        color: #ffffff;
       }
-    }
 
-    // iPhone puede entrar directamente sin token
-  });
-</script>
-
-
-
-
-  <div class="w-full h-full bg-[#0F0F0F] flex flex-col overflow-hidden relative">
-
-    <!-- Top bar -->
-    <div class="px-4 pt-6 pb-3 space-y-3">
-      <div class="flex items-center justify-between">
-      <div class="h-6 w-auto">
-  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3dK3-XAKrEia-lWmiUqAYRfFQ1lR9eJX6ZZH8e_vHf576qf9GJjIWBW9Jg5LsilXX7WO2MOEkg5gzc4pESziaPeMJ9ws9mwtCDdp3p_17D0e0Uop_ZxavwwJeNLBvoyZJ0cxTKQpjzrJIR6LjJslB24tj-77AYrRCacQ3F2S2VPoXpPzPhM1zndxyd1Rg/s3307/B64D5386-DCA4-410B-A0A6-6ACB19D0A06F.png" alt="Mi Logo" class="h-full object-contain"/>
-</div>
-        <a href="https://zinecia.github.io/Buscador/"><button aria-label="Search" onclick="https://zinecia.github.io/Buscador/" class="text-white text-lg">
-          <i class="fas fa-search"></i>
-        </button></a>
-      </div>
-
-      <!-- Menu -->
-      <div class="flex overflow-x-auto md:overflow-visible space-x-3 scrollbar-hide text-xs font-semibold text-white">
-        <a href="https://zinecia.github.io/movie/" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Movies</a>
-        <a href="#" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">No Disponible</a>
-        <a href="https://zinecia.github.io/animacion/" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Kids</a>
-        <a href="https://zinecia.github.io/familia/" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Familia</a>
-
-      </div>
-    </div>
-
-    <!-- Main content -->
-    <div class="flex-1 overflow-y-auto px-4 space-y-6 pb-24">
-      <!-- Hero banner -->
-      <div class="space-y-2">
-        <h2 class="text-white font-semibold text-base">Estrenos Populares:</h2>
-        <div class="relative overflow-hidden w-full">
-          <div id="heroContainer" class="flex w-full overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide">
-
-		   <!-- Banner 1 -->
-            <a href="https://Zinecia.github.io/peli73/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
-              <img src="https://image.tmdb.org/t/p/original/jjIMuSk3mSJq520D2spSLJbJxrw.jpg" alt="Rings of Power" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Como entrenar a tu dragon  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
-  TOP: </span>
-</div>
-            </a>
-		  <!-- Banner 1 -->
-            <a href="https://Zinecia.github.io/destinofinal6/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
-              <img src="https://image.tmdb.org/t/p/original/sTQRPIaPNVc423i3K1yhCuntTTz.jpg" alt="Rings of Power" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Destino final 6: Lazos de sangre  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
-  TOP: </span>
-</div>
-            </a>
-            <!-- Banner 2 -->
-            <a href="https://Zinecia.github.io/misionsentenciafinal/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
-              <img src="https://image.tmdb.org/t/p/original/3lvXenG7eb2f2akfxwIp9HhniKc.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Mision: Imposible - Sentencia final  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
-TOP:   
-</span></div>
-            </a>
-			
-			            <!-- Banner 2 -->
-            <a href="https://Zinecia.github.io/thunderbolts/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
-              <img src="https://image.tmdb.org/t/p/original/3Ym8diDGcHqtsTSo53xwiWJk38U.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Thunderbolts*  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
-TOP:  
-</span></div>
-            </a>
-			
-			            <!-- Banner 2 -->
-            <a href="https://Zinecia.github.io/extraterritorial/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
-              <img src="https://image.tmdb.org/t/p/original/k6PPdj6VWa02NQ8QEVm1QpuKyTU.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5">Extraterritorial  <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
- TOP: 
-</span></div>
-            </a>
-			
-			            <!-- Banner 2 -->
-            <a href="https://Zinecia.github.io/minecraftm1/index.html" class="flex-shrink-0 w-full snap-center relative rounded-xl overflow-hidden h-[180px] md:h-[220px]">
-              <img src="https://image.tmdb.org/t/p/original/5WA5sAwrQUV7TRX9OO2Nbhxu3Pu.jpg" alt="Movie 2" class="w-full h-full object-cover"/>
-              <div class="absolute bottom-3 left-3 text-white font-semibold text-sm bg-black bg-opacity-50 rounded px-2 py-0.5"> Una pelicula de Minecraft <span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">
- TOP: 
-</span></div>
-            </a>
-			
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Prime Movies -->
-      <div id="movies">
-        <h2 class="text-white font-semibold text-base mb-3">Entretenimiento:</h2>
-        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-          <a href="https://cuentaappcreator.github.io/marvel/" class="flex-shrink-0 w-[180px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTZYKFMflerJrJ4M4sEuQfY2pINsNK2npTlxunr7_dCJEFiVfOiTPwneiMIJ_HGSS5Y7wEhsg_dIR-At97s7_ckis7LgsY9StkGcfXSYVG61BnTUODKoOPgVMHw3nNMID9e7Ob6_FxrbFn08IMSP3Qks76A9-9WcUrZZ3XqG6wj484cubVINi6W9mWhLe4/s1930/marvel-logo-wallpaper.webp" alt="Movie 1" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
-           <center> <p class="text-white text-sm mt-1 truncate">MARVEL</p></center>
-          </a>
-          <a href="https://cuentaappcreator.github.io/dccomic/" class="flex-shrink-0 w-[180px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhgxRAfwZXC5a6yv14A-wb8qzkUQNkqaWmVu9F0Zivb1NVMrS4WKQdiTEua8riz-9ZkcaxFVeIJ5CrxHp7es8WJXv0oRuYoljwRxDNzrCuiR5C5Mu3DpWgpOxAekYzwpBYPHVBhLtYtPtzSDhr_IQBpRHuBE0C98-Qjpq5lqAluDqQWjNOAz5DU3C8RNzC0/s1140/dc-all-in-featured-image%20%281%29.png" alt="Movie 2" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
-           <center> <p class="text-white text-sm mt-1 truncate">DC comics</p></center>
-          </a>
-		   <a href="https://cuentaappcreator.github.io/dreamworks/" class="flex-shrink-0 w-[180px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieLvsZMLx1akBR1hqu3dpMl454pQVC47uIwOENu93VP0m_MF_ZCbcI1vWcljKRx-bfcqMHW6js2Y1bLmdvFW_uCftVRD_ZtciYnwCPWHqocoeOJYruUVuhPhkRrRuco-R93NPOM6A614vNuOcwhWia4f0aDBZTseW_rjUyDGaUjg6wMyzkiPOi1nsTet-0/s1280/maxresdefault.jpg" alt="Movie 2" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
-           <center> <p class="text-white text-sm mt-1 truncate">DreamWorks</p></center>
-          </a>
-		  <a href="https://cuentaappcreator.github.io/navidad/" class="flex-shrink-0 w-[180px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT2beyVn31m4cjspGMZR5VyLHVn0WwOX6TJZpnew2bz-df7Y7oSWwDBi44tIF77tc7vJ1wD2DBmSw74cd_hTdWEsXXOAPZ3dHEl4cdN0Pvpd9uKTl1grij_738l3euodBsLQAk4yC0_f_69lSkdIEsoQsfSnjY9ww82juTT_zKp3u8luA6MCrvbmZ_nCnO/s2800/navidad-f.webp" alt="Movie 1" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
-         <center>   <p class="text-white text-sm mt-1 truncate">Navidad</p></center>
-          </a>
-          <a href="https://cuentaappcreator.github.io/religion/" class="flex-shrink-0 w-[180px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsRQ-qo72xpilONzsCvejVHSvfwBmmkr_0PmclTlZQpE3wJq5_8_uBWzV2DgkI1d1AFbQt8sp5MMgCjX0G4PqvshrEV_6XxqJXmwabeMk3uNBbELArn6RJwCrpDzNuhgOxQtPJXn5A-3PTQw98NxavUlXjaUQl_g0MtBaPyeOTDJC_QqQYhElW9MoUhDNt/s1536/ChatGPT%20Image%2023%20may%202025,%2017_19_05.png" alt="Movie 2" class="w-full h-[110px] md:h-[130px] rounded-lg object-cover"/>
-         <center>   <p class="text-white text-sm mt-1 truncate">Cine Cristiano</p></center>
-          </a>
-         
-		  
-        </div>
-      </div>
-
-      <!-- EXTRENOS -->
-      <div id="tvshows">
-        <h2 class="text-white font-semibold text-base mb-3">Estrenos</h2>
-        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-			<!--SUBIR ESTRENO-->
-<a href="https://Zinecia.github.io/peli96/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/tUae3mefrDVTgm5mRzqWnZK6fOP.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Lilo y Stitch</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli95/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/sVuYUl7EtBxyJTOl4Ao7eZVjKDb.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El jardinero</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli80/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/epEorIcbWjuLqd4dgRWYffpazIR.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Invencible</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli78/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El Maravilloso Mago de Oz: Parte 1</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli59/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/nVwu3mN7hr1yF467pGct3yQFM41.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Popeye the Slayer Man</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli58/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/3ZMGC839jsKNAweGeQDBZDmu6ka.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Mickey 17</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli57/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El ladron de joyas</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli56/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/dmJ5U0TVU4IIXQd828z8DJFaV11.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Novocaine</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli55/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/zdClwqpYQXBSCGGDMdtvsuggwec.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Los pecadores</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli54/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/9WPWF0AmklsKclrXeyKXbQ543ZA.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Amateur</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli53/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/uyz9qcZdIrUqVrwly3KB5oPUKZO.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">La Leyenda de Ochi</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli52/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/chIQxgimGbIFnuFsLqpcoTbsH9.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Doble espionaje</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli51/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/jcV9YfjBRo6occxqeWtEiyWwMoG.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El contable 2</p>
-</a>
-
-	
-		
-		
-          
-        </div>
-      </div>
-	  
-	 
-	   <div id="tvshows">
-        <h2 class="text-white font-semibold text-base mb-3">Accion</h2>
-        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-		<!--SUBIR ACCION-->
-<a href="https://Zinecia.github.io/peli99/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/eLBWBW4hariYCgTS5BL1tpMAYiG.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Rescate implacable</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli97/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/AoXAvZDxcym6oONBvJ82tFjEGdY.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">La bala perdida 3</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli51/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/jcV9YfjBRo6occxqeWtEiyWwMoG.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El contable 2</p>
-</a>
-
-
-
-		
-          
-          <a href="https://zinecia.github.io/label-accion/" class="flex-shrink-0 w-[120px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-            <p class="text-white text-sm mt-1 truncate">Ver Mas...</p>
-          </a>
-        </div>
-      </div>
-		  
-		  <div id="tvshows">
-        <h2 class="text-white font-semibold text-base mb-3">Comedia</h2>
-        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-		<!--SUBIR COMEDIA-->
-<a href="https://Zinecia.github.io/peli63/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/1DY7eSoQLoTNhJTT455N74VuHHx.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Ted</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli48/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/jwBcQXp7WgYgrcANpnuLCCfLpkK.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Juego de armas</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli40/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/vVIDt9FjuTLbXeuc2mJRYnqMh1F.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Antes de ti</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli35/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/sW0tABq2gGGzdwHKhBs2hupEK11.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">La mascara</p>
-</a>
-
-		
-		<a href="https://Zinecia.github.io/abracadabra1/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/hnRo1RB791GbpERgV7cnM2sek2V.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El retorno de las brujas 1993</p>
-</a>
-
-      <a href="https://zinecia.github.io/label-comedia/" class="flex-shrink-0 w-[120px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-            <p class="text-white text-sm mt-1 truncate">Ver Mas...</p>
-          </a>
-        </div>
-      </div>
-	  
-	  <div id="tvshows">
-        <h2 class="text-white font-semibold text-base mb-3">Animacion</h2>
-        <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-		<!--SUBIR ANIMACION-->
-<a href="https://Zinecia.github.io/peli83/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/kq32P0VC4yWYujyByp7ieNCZjA.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El dia que la Tierra exploto: Una pelicula de Looney Tunes</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli70/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/original/jKD2ElIBJp30Pdw31gAEu2F1luL.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El Zorro y el Sabueso</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli26/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/zMEky5WS29EjnmeSXvSm4YATV2R.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">La pelicula de Tigger</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli12/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/3ALM0VeZjGUryAqWo6pqohzbLDh.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">El cadaver de la novia</p>
-</a>
-
-<a href="https://Zinecia.github.io/puertasecret/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/xz1HjxeqpIACyPtJMqv33Z2RjRP.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Los mundos de Coraline</p>
-</a>
-
-<a href="https://Zinecia.github.io/tipsmalos/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/4njXv4s77hq9VGMOquvRQDiu53W.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Los tipos malos: Truco o atraco?</p>
-</a>
-
-		
-    
-          <a href="https://zinecia.github.io/animacion/" class="flex-shrink-0 w-[120px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-            <p class="text-white text-sm mt-1 truncate">Ver Mas...</p>
-          </a>
-        </div>
-      </div>
-	  
-	  <div id="tvshows">
-        <h2 class="text-white font-semibold text-base mb-3">Romance</h2>
-	 <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-	 <!--SUBIR ROMANCE-->
-<a href="https://Zinecia.github.io/peli86/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/4F5LggLzv2VIa0MJT2ETN8bWtr2.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">A Dos Metros de Ti</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli66/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Culpa mia: Londres</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli40/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/vVIDt9FjuTLbXeuc2mJRYnqMh1F.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Antes de ti</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli37/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/3F5MkMadQOWiZNVaNuOuw6UaK7a.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">A traves de mi ventana</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli34/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/g4TAQ4mYvObkOvX5cBAZrDT3NmJ.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Siempre a mi lado</p>
-</a>
-
-	 
-  
-          <a href="https://zinecia.github.io/romance/" class="flex-shrink-0 w-[120px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-            <p class="text-white text-sm mt-1 truncate">Ver Mas...</p>
-          </a>
-        </div>
-      </div>
-	  
-	  <div id="tvshows">
-	  <h2 class="text-white font-semibold text-base mb-3">Terror</h2>
- <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
-          <!--SUBIR TERROR-->
-<a href="https://Zinecia.github.io/peli109/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/qJO54b6LsBmEkMxdW8ZziL9Mnam.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Sonrie</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli91/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/3hcfxkII892XuzoSW0JvdE68JAq.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">La mujer de las sombras</p>
-</a>
-
-<a href="https://Zinecia.github.io/peli79/index.html" class="flex-shrink-0 w-[120px]">
-  <img src="https://image.tmdb.org/t/p/w500/2Xjip3BSCNQprHcpyBQoCtNxvfU.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-  <p class="text-white text-sm mt-1 truncate">Sting</p>
-</a>
-
-
-		
-          <a href="https://zinecia.github.io/terror/" class="flex-shrink-0 w-[120px]">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgiTXUYNPj0m3oyC2TbJX2eeAJVYrNBZ_7PSIMephSP0GWh099GdVip21nYTc-5XUX56WqlCEaopFiyAs2QNcDWPqicKBlJIE7xAPM6hPyExNiyHvhjD30IOQqz2B4NqCt1QPazbpMh49sBe1-unSkuRb6fPn3BwyE63WZZgxUCMAvUT_KZa1eRRMdO-SdN/s1083/Picsart_25-03-19_19-03-37-724.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
-            <p class="text-white text-sm mt-1 truncate">Ver Mas...</p>
-          </a>
-        </div>
-      </div>
-		  
-		  
-		  
-		  
-        </div>
-      
-    </div>
-
-    <!-- Bottom navigation -->
-<nav class="fixed bottom-0 left-0 w-full bg-[#1E1E1E] flex justify-around items-center py-3 rounded-b-3xl text-white text-xs font-semibold z-50">
-  <a href="https://zinecia.github.io/Home" class="flex flex-col items-center space-y-1 text-red-600">
-    <i class="fas fa-home text-xl"></i><span>Inicio</span>
-  </a>
-  <a href="https://cuentaappcreator.github.io/streaming" class="flex flex-col items-center space-y-1">
-    <i class="fas fa-th-large text-xl"></i><span>Streaming</span>
-  </a>
-  <a href="https://zinecia.github.io/Favoritos/" class="flex flex-col items-center space-y-1">
-    <i class="fas fa-heart text-xl"></i>Favoritos
-  </a>
-  <a href="https://zinecia.github.io/Buscador/" class="flex flex-col items-center space-y-1">
-    <i class="fas fa-search text-xl"></i><span>Buscar</span>
-  </a>
-</nav>
-
-  </div>
-
-  <script>
-    const container = document.getElementById("heroContainer");
-    const slides = container.children;
-    let index = 0;
-    let autoScrollTimer;
-
-    function scrollToSlide(i) {
-      const slideWidth = container.offsetWidth;
-      container.scrollTo({
-        left: slideWidth * i,
-        behavior: 'smooth'
-      });
-    }
-
-    function startAutoScroll() {
-      autoScrollTimer = setInterval(() => {
-        index = (index + 1) % slides.length;
-        scrollToSlide(index);
-      }, 5000);
-    }
-
-    function resetAutoScroll() {
-      clearInterval(autoScrollTimer);
-      startAutoScroll();
-    }
-
-    let isScrolling;
-    container.addEventListener('scroll', () => {
-      clearTimeout(isScrolling);
-      isScrolling = setTimeout(() => {
-        const scrollLeft = container.scrollLeft;
-        const slideWidth = container.offsetWidth;
-        index = Math.round(scrollLeft / slideWidth);
-        resetAutoScroll();
-      }, 150);
-    });
-
-    startAutoScroll();
-	
- document.addEventListener("DOMContentLoaded", function () {
-    const container = document.querySelector("#tvshows .flex");
-
-  const allPosters = container.querySelectorAll("a:not(:last-child)");
-
-   if (allPosters.length > 10) {
-      const excess = allPosters.length - 10;
-      for (let i = 0; i < excess; i++) {
-        container.removeChild(allPosters[i]);
-      }
-    }
-  });
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  function limpiarTextoRoto(texto) {
-    try {
-      let limpio = decodeURIComponent(escape(texto));
-       return limpio;
-    } catch (e) {
-      return texto;
-    }
-  }
-
-  function limpiarNodo(node) {
-    // Limpiar texto de nodos de texto
-    if (node.nodeType === 3) {
-      node.textContent = limpiarTextoRoto(node.textContent);
-    }
-
-    // Limpiar atributos de elementos HTML
-    if (node.nodeType === 1) {
-      const atributos = ["alt", "title", "placeholder", "aria-label"];
-      atributos.forEach(attr => {
-        if (node.hasAttribute(attr)) {
-          node.setAttribute(attr, limpiarTextoRoto(node.getAttribute(attr)));
+      @layer utilities {
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
+      }
+
+      a {
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: #38bdf8;
+      }
+
+      .card {
+        background-color: #1c1c1c;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+      }
+
+      #sidebar {
+        background-color: #1a1a1a;
+        border-right: 1px solid #333;
+      }
+
+      #sidebar a {
+        color: #d1d5db;
+      }
+
+      #sidebar a:hover {
+        color: #60a5fa;
+      }
+
+      header {
+        background: #111;
+        box-shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #facc15;
+      }
+
+      button {
+        transition: background-color 0.3s ease;
+      }
+
+      .bg-blue-700:hover {
+        background-color: #2563eb;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #444;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body class="relative">
+
+    <!-- Sidebar Background Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleSidebar(false)"></div>
+
+    <!-- Sidebar Menu -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full z-50 transform -translate-x-full transition-transform duration-300">
+      <div class="flex justify-between items-center p-4 border-b border-gray-700">
+        <h2 class="text-lg font-semibold text-yellow-400">Menú</h2>
+        <button onclick="toggleSidebar(false)" class="text-white text-xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-4 p-4 flex-grow">
+        <a href="https://zinecia.github.io/Home">Regresar</a>
+        <a href="https://zinecia.github.io/Buscador/">Buscar</a>
+        <a href="https://zinecia.github.io/Movie">Películas</a>
+        <a href="https://zinecia.github.io/Favoritos/">Favoritos</a>
+        <a href="https://cuentaappcreator.github.io/streaming/">Streaming</a>
+      </nav>
+
+      <div class="p-4 border-t border-gray-700">
+        <button
+          onclick="toggleSidebar(false)"
+          class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded"
+          aria-label="Cerrar menú"
+        >
+          Cerrar menú
+        </button>
+      </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-3 py-2">
+      <button aria-label="Menu" class="text-white text-2xl" onclick="toggleSidebar(true)">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="https://zinecia.github.io/Home" class="block w-28 sm:w-32">
+        <h1>MOVIES</h1>
+      </a>
+      <a href="https://zinecia.github.io/Buscador/">
+        <button aria-label="Search" class="text-white text-2xl">
+          <i class="fas fa-search"></i>
+        </button>
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="px-3 pb-6 mt-[60px]">
+      <div class="grid grid-cols-3 sm:grid-cols-[repeat(auto-fit,_minmax(140px,_1fr))] gap-4 mt-3">
+        <!--PEGAR CONTENIDO AQUI ABAJO-->
+
+      </div>
+    </main>
+
+    <!-- JS para abrir/cerrar el sidebar -->
+    <script>
+      function toggleSidebar(open) {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        if (open) {
+          sidebar.classList.remove('-translate-x-full');
+          overlay.classList.remove('hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          overlay.classList.add('hidden');
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        function limpiarTextoRoto(texto) {
+          try {
+            let limpio = decodeURIComponent(escape(texto));
+            limpio = limpio.replace(/[^a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ¡!¿?.,:;()\[\]{}<>«»"'°\-\s]/g, "");
+            return limpio;
+          } catch (e) {
+            return texto;
+          }
+        }
+
+        function limpiarNodo(node) {
+          if (node.nodeType === 3) {
+            node.textContent = limpiarTextoRoto(node.textContent);
+          }
+
+          if (node.nodeType === 1) {
+            const atributos = ["alt", "title", "placeholder", "aria-label"];
+            atributos.forEach(attr => {
+              if (node.hasAttribute(attr)) {
+                node.setAttribute(attr, limpiarTextoRoto(node.getAttribute(attr)));
+              }
+            });
+          }
+
+          node.childNodes.forEach(hijo => limpiarNodo(hijo));
+        }
+
+        limpiarNodo(document.body);
+
+        const observer = new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(nodo => {
+              limpiarNodo(nodo);
+            });
+          });
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
       });
-    }
-
-    // Recursividad para limpiar todo
-    node.childNodes.forEach(hijo => limpiarNodo(hijo));
-  }
-
-  // Limpieza inicial
-  limpiarNodo(document.body);
-
-
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      mutation.addedNodes.forEach(nodo => {
-        limpiarNodo(nodo);
-      });
-    });
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-    characterData: true
-  });
-});
-
-  </script>
-</body>
+    </script>
+  </body>
 </html>
