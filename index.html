@@ -23,29 +23,43 @@
 <body class="bg-black text-white w-screen h-screen overflow-hidden">
 	
 <script>
-  window.addEventListener("load", () => {
+  window.addEventListener("DOMContentLoaded", () => {
+    const userAgent = navigator.userAgent;
     const token = sessionStorage.getItem("lz_token");
 
-    function esIphone() {
-      return /iPhone/i.test(navigator.userAgent);
-    }
+    const esAndroid = /Android/i.test(userAgent);
+    const esIOS = /iPhone|iPad|iPod/i.test(userAgent);
+    const esAppOriginal = /Vinebre/i.test(userAgent);
+    const esPC = !esAndroid && !esIOS;
 
-    function esAppCreator() {
-      return /Vinebre/i.test(navigator.userAgent); // Detectamos tu app
-    }
-
-    // Acceso libre para iPhone y tu app oficial Vinebre
-    if (esIphone() || esAppCreator()) {
+    if (esAndroid && !esAppOriginal) {
+      alert("Esta versión no es oficial. Por favor descarga la app oficial para acceder.");
+      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
       return;
     }
 
-    // Para Android y PC: validar token
-    if (token !== "acceso_valido") {
-      alert("No tienes acceso. Serás redirigido al login.");
+    if (esAndroid && esAppOriginal && token !== "acceso_valido") {
+      alert("Acceso no autorizado. Inicia sesión desde la app.");
       window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
+      return;
     }
+
+    if (esPC && token !== "clave_pc_valida") {
+      const clave = prompt("Ingresa la contraseña para acceder:");
+      if (clave === "TuClaveSegura") {
+        sessionStorage.setItem("lz_token", "clave_pc_valida");
+        alert("Acceso concedido desde PC.");
+      } else {
+        alert("Contraseña incorrecta.");
+        window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
+        return;
+      }
+    }
+
+    // iPhone puede entrar directamente sin token
   });
 </script>
+
 
 
 
