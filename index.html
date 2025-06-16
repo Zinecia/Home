@@ -21,9 +21,7 @@
   </style>
 </head>
 <body class="bg-black text-white w-screen h-screen overflow-hidden">
-	<script>
-  alert(navigator.userAgent);
-</script>
+	
 <script>
   window.addEventListener("load", () => {
     const token = sessionStorage.getItem("lz_token");
@@ -32,18 +30,23 @@
       return /iPhone/i.test(navigator.userAgent);
     }
 
-    // Si es iPhone, acceso directo sin token
-    if (esIphone()) {
+    function esAppCreator() {
+      return /Vinebre/i.test(navigator.userAgent); // Detectamos tu app
+    }
+
+    // Acceso libre para iPhone y tu app oficial Vinebre
+    if (esIphone() || esAppCreator()) {
       return;
     }
 
-    // Para Android y PC validar token
+    // Para Android y PC: validar token
     if (token !== "acceso_valido") {
       alert("No tienes acceso. Serás redirigido al login.");
-      window.location.href = "https://tudominio.com/login.html"; // Cambia por URL real
+      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
     }
   });
 </script>
+
 
 
   <div class="w-full h-full bg-[#0F0F0F] flex flex-col overflow-hidden relative">
