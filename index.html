@@ -24,12 +24,24 @@
 	<script>
   window.addEventListener("load", () => {
     const token = sessionStorage.getItem("lz_token");
+
+    function esIphone() {
+      return /iPhone/i.test(navigator.userAgent);
+    }
+
+    // Si es iPhone, acceso directo sin token
+    if (esIphone()) {
+      return;
+    }
+
+    // Para Android y PC validar token
     if (token !== "acceso_valido") {
-      alert("No tienes acceso. Seras redirigido al login.");
-      window.location.href = "https://zinecia.github.io/sv/"; // Cambia esta URL por la real de tu login
+      alert("No tienes acceso. Serás redirigido al login.");
+      window.location.href = "https://tudominio.com/login.html"; // Cambia por URL real
     }
   });
 </script>
+
 
   <div class="w-full h-full bg-[#0F0F0F] flex flex-col overflow-hidden relative">
 
