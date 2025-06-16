@@ -21,6 +21,16 @@
   </style>
 </head>
 <body class="bg-black text-white w-screen h-screen overflow-hidden">
+	<script>
+  window.addEventListener("load", () => {
+    const token = sessionStorage.getItem("lz_token");
+    if (token !== "acceso_valido") {
+      alert("No tienes acceso. Seras redirigido al login.");
+      window.location.href = "https://zinecia.github.io/sv/"; // Cambia esta URL por la real de tu login
+    }
+  });
+</script>
+
   <div class="w-full h-full bg-[#0F0F0F] flex flex-col overflow-hidden relative">
 
     <!-- Top bar -->
