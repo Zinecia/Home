@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>LzPlay Plus</title>
+  <title>LzPlay VIP</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2468/2468825.png" type="image/png" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
@@ -18,6 +20,8 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+	
+	
   </style>
 </head>
 <body class="bg-black text-white w-screen h-screen overflow-hidden">
@@ -76,6 +80,7 @@
 
       <!-- Menu -->
       <div class="flex overflow-x-auto md:overflow-visible space-x-3 scrollbar-hide text-xs font-semibold text-white">
+	          <a href="#" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Proximamente</a>
         <a href="https://zinecia.github.io/movie/" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Movies</a>
         <a href="https://zinecia.github.io/serie/" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">TV Shows</a>
         <a href="https://zinecia.github.io/animacion/" class="bg-[#1E1E1E] rounded-full px-4 py-1 flex-shrink-0">Kids</a>
@@ -85,7 +90,8 @@
     </div>
 
     <!-- Main content -->
-    <div class="flex-1 overflow-y-auto px-4 space-y-6 pb-24">
+    <div class="flex-1 overflow-y-auto px-4 space-y-6 pb-32">
+
       <!-- Hero banner -->
       <div class="space-y-2">
         <h2 class="text-white font-semibold text-base">Estrenos Populares:</h2>
@@ -573,6 +579,25 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+ function ajustarPaddingInferior() {
+    const nav = document.querySelector('nav[role="navigation"], nav');
+    const mainContent = document.querySelector('div.flex-1');
+
+    if (!nav || !mainContent) return;
+
+    const alturaNav = nav.offsetHeight;
+
+    // Aplicar padding-bottom igual a la altura del nav + safe-area inset para móviles con notch
+    const safeAreaInset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('env(safe-area-inset-bottom)')) || 0;
+
+   mainContent.style.paddingBottom = (alturaNav + safeAreaInset + 10) + 'px';
+  }
+
+  // Ajustar al cargar la página
+  window.addEventListener('load', ajustarPaddingInferior);
+
+  // Ajustar también cuando la ventana se redimensiona
+  window.addEventListener('resize', ajustarPaddingInferior);
   </script>
 </body>
 </html>
