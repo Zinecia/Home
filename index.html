@@ -266,6 +266,11 @@ TOP:
         <h2 class="text-white font-semibold text-base mb-3">Accion</h2>
         <div class="flex overflow-x-auto space-x-3 scrollbar-hide whitespace-nowrap">
 		<!--SUBIR ACCION-->
+<a href="https://Zinecia.github.io/contenido114/index.html" class="flex-shrink-0 w-[120px]">
+  <img src="https://image.tmdb.org/t/p/w500/mj2Z9HnRSIEk3n7yVPoOY4Uzzfh.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
+  <p class="text-white text-sm mt-1 truncate">John Wick 4</p>
+</a>
+
 <a href="https://Zinecia.github.io/contenido2/index.html" class="flex-shrink-0 w-[120px]">
   <img src="https://image.tmdb.org/t/p/w500/efNhiZPk71FTYJ30dBkWMfc939D.jpg" alt="Original 3" class="w-full h-[170px] md:h-[190px] rounded-lg object-cover"/>
   <p class="text-white text-sm mt-1 truncate">Karate Kid: Leyendas</p>
@@ -588,16 +593,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const alturaNav = nav.offsetHeight;
 
-    // Aplicar padding-bottom igual a la altura del nav + safe-area inset para móviles con notch
+    // Aplicar padding-bottom igual a la altura del nav + safe-area inset para mÃ³viles con notch
     const safeAreaInset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('env(safe-area-inset-bottom)')) || 0;
 
    mainContent.style.paddingBottom = (alturaNav + safeAreaInset + 10) + 'px';
   }
 
-  // Ajustar al cargar la página
+  // Ajustar al cargar la pÃ¡gina
   window.addEventListener('load', ajustarPaddingInferior);
 
-  // Ajustar también cuando la ventana se redimensiona
+  // Ajustar tambiÃ©n cuando la ventana se redimensiona
   window.addEventListener('resize', ajustarPaddingInferior);
   </script>
 </body>
