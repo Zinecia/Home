@@ -50,12 +50,14 @@
     const esIOS = /iPhone|iPad|iPod/i.test(userAgent);
     const esAppOriginal = /Vinebre/i.test(userAgent);
     const esPC = !esAndroid && !esIOS;
+ const esExcepcion = sessionStorage.getItem("excepcion_android") === "1";
 
-    if (esAndroid && !esAppOriginal) {
-      alert("Esta version no es oficial. Por favor descarga la app oficial para acceder.");
-      window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
-      return;
-    }
+if (esAndroid && !esAppOriginal && !esExcepcion) {
+  alert("Esta version no es oficial...");
+  window.location.href = "https://lzrdrgz01.github.io/download-LzPlay/";
+  return;
+}
+
 
     if (esAndroid && esAppOriginal && token !== "acceso_valido") {
       alert("Acceso no autorizado. Inicia sesion desde la app.");
