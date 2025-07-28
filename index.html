@@ -12,7 +12,6 @@
       font-family: 'Montserrat', sans-serif;
     }
   
-    /* Scrollbar visible y estilizado */
     .scrollbar-thin::-webkit-scrollbar {
       height: 6px;
     }
@@ -55,6 +54,12 @@
     .accordion-header i.rotated {
       transform: rotate(180deg);
     }
+	
+	 html, body {
+    height: auto;
+    overflow-y: auto !important;
+    overscroll-behavior: auto;
+  }
   </style>
   <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
 <!-- Google Analytics -->
@@ -65,9 +70,6 @@
   gtag('js', new Date());
   gtag('config', 'G-622CWCXV7F');
 </script>
-
-</head>
-<body class="bg-black text-white w-screen h-screen overflow-hidden">
 	
 <script>
   window.addEventListener("DOMContentLoaded", () => {
@@ -105,9 +107,13 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
       }
     }
 
-    // iPhone puede entrar directamente sin token
+   
   });
 </script>
+</head>
+<body class="bg-black text-white min-h-screen overflow-x-hidden">
+
+
 </head>
 <body class="bg-black text-white">
 <section id="dynamicHero" class="relative w-full overflow-hidden h-[60vh] md:h-[70vh]">
@@ -133,7 +139,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
 </header>
 
 <!-- Fondo para cerrar menú -->
-<div id="menuBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+<div id="menuBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden pointer-events-none"></div>
 
 <!-- Menú lateral -->
 <nav id="accordionMenu" class="fixed top-0 left-0 w-64 h-full bg-black bg-opacity-70 backdrop-blur-md text-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
@@ -159,13 +165,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
         Navidad
       </a>
     </li>
-    <li>
-      <a href="https://cuentaappcreator.github.io/religion/" target="_blank" class="block py-2 px-3 hover:bg-pink-600 rounded font-semibold">
-        Cine Cristiano
-      </a>
-    </li>
-    <li>
-	
+    
 	<li>
       <a href="https://cuentaappcreator.github.io/religion/" target="_blank" class="block py-2 px-3 hover:bg-pink-600 rounded font-semibold">
         Cine Cristiano
@@ -197,27 +197,27 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
       Comedia
       </a>
     </li>
-    <li><li>
+    <li>
       <a href="https://zinecia.github.io/cienciaficcion/" target="_blank" class="block py-2 px-3 hover:bg-pink-600 rounded font-semibold">
         Ciencia Ficcion
       </a>
     </li>
-    <li><li>
+    <li>
       <a href="https://zinecia.github.io/animacion/" target="_blank" class="block py-2 px-3 hover:bg-pink-600 rounded font-semibold">
         Infantil
       </a>
     </li>
-    <li><li>
+    <li>
       <a href="https://zinecia.github.io/romance/" target="_blank" class="block py-2 px-3 hover:bg-pink-600 rounded font-semibold">
        Romance
       </a>
     </li>
-    <li><li>
+    <li>
       <a href="https://zinecia.github.io/terror/" target="_blank" class="block py-2 px-3 hover:bg-pink-600 rounded font-semibold">
       Terror
       </a>
     </li>
-    <li>
+    
     <li>
       <button class="w-full flex justify-between items-center py-2 px-3 hover:bg-pink-600 rounded accordion-header focus:outline-none font-semibold">
         Sub-Categorías
@@ -334,7 +334,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
 <section class="mt-6">
  <div class="flex justify-between items-center mb-2">
     <h2 class="text-white text-base font-normal">Peliculas Populares</h2>
-    <a href="https://zinecia.github.io/movie/" class="text-pink-500 text-sm font-semibold hover:underline">
+    <a href="#" class="text-pink-500 text-sm font-semibold hover:underline">
       Ver más
     </a>
   </div>
@@ -415,7 +415,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
 <section class="mt-6">
  <div class="flex justify-between items-center mb-2">
     <h2 class="text-white text-base font-normal">Tv Shows</h2>
-    <a href="https://zinecia.github.io/serie/" class="text-pink-500 text-sm font-semibold hover:underline">
+    <a href="#" class="text-pink-500 text-sm font-semibold hover:underline">
       Ver más
     </a>
   </div>
@@ -525,7 +525,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
 
   var elegida = peliculas[Math.floor(Math.random() * peliculas.length)];
 
-
+  // Insertar contenido del héroe de una vez
   document.getElementById('dynamicHero').innerHTML = `
     <img src="${elegida.imagen}" alt="${elegida.titulo}" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6">
@@ -543,7 +543,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
     </div>
   `;
 
- 
+  // Asignar listeners directos para modal
   var modal = document.getElementById('infoModal');
   var modalText = document.getElementById('modalDescription');
   var openModalBtn = document.getElementById('openModal');
@@ -558,14 +558,14 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
     modal.classList.add('hidden');
   });
 
-
+  // También cerrar modal al hacer click fuera del contenido (fondo)
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.classList.add('hidden');
     }
   });
 
-
+  // Menu lateral y hamburguesa
   var menuToggle = document.getElementById('menuToggle');
   var accordionMenu = document.getElementById('accordionMenu');
   var menuBackdrop = document.getElementById('menuBackdrop');
@@ -586,7 +586,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
     document.body.style.overflow = '';
     menuButtonContainer.classList.remove('move-right');
 
-  
+    // Cerrar todos los acordeones
     document.querySelectorAll('.accordion-content').forEach(function(c) {
       c.classList.remove('open');
     });
@@ -605,6 +605,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
 
   menuBackdrop.addEventListener('click', closeMenu);
 
+  // Control acordeón con clases, menos cálculos
   var headers = document.querySelectorAll('.accordion-header');
   headers.forEach(function(header) {
     header.addEventListener('click', function() {
@@ -612,7 +613,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
       var icon = this.querySelector('i');
       var isOpen = content.classList.contains('open');
 
-
+      // Cerrar todo primero
       document.querySelectorAll('.accordion-content').forEach(function(c) {
         c.classList.remove('open');
       });
@@ -620,7 +621,7 @@ if (esAndroid && !esAppOriginal && !esExcepcion) {
         ic.classList.remove('rotated');
       });
 
-     
+      // Si no estaba abierto, abrirlo
       if (!isOpen) {
         content.classList.add('open');
         icon.classList.add('rotated');
