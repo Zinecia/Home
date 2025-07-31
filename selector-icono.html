@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Selecciona tu icono</title>
+<title>Seleccionar Icono de Usuario</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
-    padding: 1rem;
     background: #111;
     color: white;
+    font-family: Arial, sans-serif;
+    padding: 1rem;
   }
   h1 {
     margin-bottom: 1rem;
@@ -20,26 +20,23 @@
     gap: 1rem;
   }
   .icono {
-    border: 3px solid transparent;
-    border-radius: 50%;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    border-radius: 50%;
     width: 100px;
     height: 100px;
     object-fit: cover;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
   }
   .icono:hover, .icono.selected {
-    border-color: #e50914; /* rojo Netflix */
+    border-color: #e50914;
   }
 </style>
 </head>
 <body>
 
 <h1>Selecciona tu icono de usuario</h1>
-
-<div class="grid" id="iconContainer">
-  <!-- Iconos se cargan con JS -->
-</div>
+<div class="grid" id="iconContainer"></div>
 
 <script>
 const iconos = [
@@ -54,21 +51,20 @@ const iconos = [
 ];
 
 const container = document.getElementById('iconContainer');
+const iconoGuardado = localStorage.getItem('iconoUsuario');
 
 function renderIconos() {
   container.innerHTML = '';
-  const seleccionado = localStorage.getItem('iconoUsuario');
-  
   iconos.forEach(url => {
     const img = document.createElement('img');
     img.src = url;
-    img.alt = 'Icono usuario';
-    img.className = 'icono';
-    if (url === seleccionado) img.classList.add('selected');
+    img.alt = "Icono usuario";
+    img.className = "icono";
+    if (url === iconoGuardado) img.classList.add('selected');
     img.addEventListener('click', () => {
       localStorage.setItem('iconoUsuario', url);
       renderIconos();
-      alert('Icono guardado!');
+      alert('Icono guardado correctamente!');
     });
     container.appendChild(img);
   });
