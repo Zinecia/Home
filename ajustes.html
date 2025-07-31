@@ -257,17 +257,22 @@
         font-size: 16px;
       }
     }
+	
+	#toastGuardado.show {
+  opacity: 1;
+  pointer-events: auto;
+  bottom: 2rem;
+}
+
   </style>
 </head>
 <body>
   <main role="main" aria-label="Ajustes del usuario">
-    <header>
-      <h1>Ajustes</h1>
-     <a href="https://zinecia.github.io/Home" class="flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold text-sm transition" aria-label="Volver">
-  <i class="fas fa-chevron-left"></i>
-  Regresar
-</a>
-    </header>
+   <header> <h1>Ajustes</h1>
+  <a href="index.html" aria-label="Regresar" class="text-red-600 hover:text-red-700 transition font-semibold">
+    <i class="fas fa-arrow-left mr-1"></i> Regresar
+  </a>
+</header>
 
     <section class="avatar-container" aria-label="Avatar de perfil">
       <img
@@ -282,15 +287,28 @@
       </a>
     </section>
 
-    <form>
-      <label for="profileName">Nombre de perfil</label>
-      <input
-        id="profileName"
-        type="text"
-        value="Usuario Demo"
-        autocomplete="off"
-      />
-    </form>
+  <form id="nombreForm" class="flex items-center gap-3">
+  <div class="flex-1">
+    <label for="profileName">Nombre de perfil</label>
+    <input
+      id="profileName"
+      type="text"
+      value="Usuario Demo"
+      autocomplete="off"
+      class="w-full"
+    />
+  </div>
+  <button
+    id="guardarNombreBtn"
+    type="button"
+    class="text-sm font-semibold text-red-600 hover:text-red-700 transition hidden"
+    aria-label="Guardar nombre"
+  >
+    <i class="fas fa-save mr-1"></i> Guardar
+  </button>
+</form>
+
+
 
     <section aria-label="Opciones de ajustes" class="flex flex-col gap-6">
       <!-- Redes Sociales -->
@@ -420,18 +438,9 @@
 </div>
 
 <script>
-  // Cargar icono guardado si existe
-  const iconoGuardado = localStorage.getItem('iconoUsuario');
-  if (iconoGuardado) {
-    const avatar = document.getElementById('avatarIcono');
-    if (avatar) {
-      avatar.src = iconoGuardado;
-    }
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
     const inputNombre = document.getElementById('profileName');
-    const botonGuardar = document.querySelector('header button');
+    const guardarBtn = document.getElementById('guardarNombreBtn');
 
     // Cargar nombre guardado si existe
     const nombreGuardado = localStorage.getItem('nombrePerfil');
@@ -439,11 +448,26 @@
       inputNombre.value = nombreGuardado;
     }
 
-    // Guardar al hacer clic
-    botonGuardar.addEventListener('click', () => {
+    // Mostrar botón solo si el nombre cambia
+    inputNombre.addEventListener('input', () => {
+      const nuevoNombre = inputNombre.value.trim();
+      const actual = localStorage.getItem('nombrePerfil') || "Usuario Demo";
+      guardarBtn.classList.toggle('hidden', nuevoNombre === actual);
+    });
+
+    // Al hacer clic en guardar
+    guardarBtn.addEventListener('click', () => {
       const nuevoNombre = inputNombre.value.trim();
       localStorage.setItem('nombrePerfil', nuevoNombre);
-      alert('Nombre guardado');
+      guardarBtn.classList.add('hidden');
+
+      // Mostrar toast bonito
+      const toast = document.getElementById('toastGuardado');
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
     });
 
     // Modal de cerrar sesión
@@ -462,30 +486,28 @@
 
     confirmLogout.addEventListener('click', () => {
       modal.classList.add('hidden');
-
-      // Opcional: borrar datos guardados
-      // localStorage.clear();
-
-      const isAndroid =
-        /Android/i.test(navigator.userAgent) &&
-        !/Chrome/i.test(navigator.userAgent);
-
-      if (isAndroid) {
-        try {
-          window.close();
-        } catch {
-          alert('No se pudo cerrar la app desde el navegador.');
-        }
-      } else {
-        window.open('', '_self');
-        window.close();
-        setTimeout(() => {
-          window.location.href = 'about:blank';
-        }, 500);
-      }
+      window.open('', '_self');
+      window.close();
+      setTimeout(() => {
+        window.location.href = 'about:blank';
+      }, 500);
     });
+
+    // Cargar icono guardado si existe
+    const iconoGuardado = localStorage.getItem('iconoUsuario');
+    if (iconoGuardado) {
+      const avatar = document.getElementById('avatarIcono');
+      if (avatar) avatar.src = iconoGuardado;
+    }
   });
 </script>
+
+<!-- Toast de confirmación -->
+<div id="toastGuardado" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#222] text-white px-4 py-3 rounded-lg shadow-lg border border-green-500 flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-300 z-50">
+  <i class="fas fa-check-circle text-green-400"></i>
+  <span>Nombre guardado correctamente</span>
+</div>
+
 
 </body>
 </html>
