@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Selecciona tu icono</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 1rem;
+    background: #111;
+    color: white;
+  }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+    gap: 1rem;
+  }
+  .icono {
+    border: 3px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  .icono:hover, .icono.selected {
+    border-color: #e50914; /* rojo Netflix */
+  }
+</style>
+</head>
+<body>
+
+<h1>Selecciona tu icono de usuario</h1>
+
+<div class="grid" id="iconContainer">
+  <!-- Iconos se cargan con JS -->
+</div>
+
+<script>
+const iconos = [
+  "https://i.pinimg.com/736x/be/63/5e/be635e844cf106b57ee689803dca58af.jpg",
+  "https://i.pinimg.com/736x/8d/2d/ad/8d2dad6e0b79cf69b3d4028869dabc34.jpg",
+  "https://i.pinimg.com/736x/a4/c6/5f/a4c65f709d4c0cb1b4329c12beb9cd78.jpg",
+  "https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg",
+  "https://i.pinimg.com/736x/b4/0b/51/b40b51418293936a6e0ad09ffa229cb7.jpg",
+  "https://i.pinimg.com/1200x/ec/74/7a/ec747a688a5d6232663caaf114bad1c3.jpg",
+  "https://i.pinimg.com/736x/4c/fb/ce/4cfbcef5bcaf7587b1df8cc82c28bc0d.jpg",
+  "https://i.pinimg.com/1200x/05/80/4d/05804d23919f20ad798f06f41d80dc99.jpg"
+];
+
+const container = document.getElementById('iconContainer');
+
+function renderIconos() {
+  container.innerHTML = '';
+  const seleccionado = localStorage.getItem('iconoUsuario');
+  
+  iconos.forEach(url => {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Icono usuario';
+    img.className = 'icono';
+    if (url === seleccionado) img.classList.add('selected');
+    img.addEventListener('click', () => {
+      localStorage.setItem('iconoUsuario', url);
+      renderIconos();
+      alert('Icono guardado!');
+    });
+    container.appendChild(img);
+  });
+}
+
+renderIconos();
+</script>
+
+</body>
+</html>
