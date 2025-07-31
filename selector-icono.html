@@ -1,77 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Seleccionar Icono de Usuario</title>
-<style>
-  body {
-    background: #111;
-    color: white;
-    font-family: Arial, sans-serif;
-    padding: 1rem;
-  }
-  h1 {
-    margin-bottom: 1rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
-    gap: 1rem;
-  }
-  .icono {
-    cursor: pointer;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 3px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-  .icono:hover, .icono.selected {
-    border-color: #e50914;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seleccionar Icono de Usuario</title>
+
+  <!-- Font Awesome 5.15.4 CDN simple -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+      margin: 0;
+      position: relative;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      margin-top: 4rem; /* Para que no quede tapado por el header */
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+    }
+
+    .icono {
+      cursor: pointer;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 3px solid transparent;
+      transition: border-color 0.3s ease, transform 0.3s;
+    }
+
+    .icono:hover {
+      transform: scale(1.05);
+    }
+
+    .icono.selected {
+      border-color: #e50914;
+      box-shadow: 0 0 10px #e50914aa;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00c851;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      display: none;
+      z-index: 999;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3.5rem;
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    /* Botón regresar en header */
+    .btn-regresar {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 1.8rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 50%;
+      transition: color 0.3s ease, background-color 0.3s ease;
+      box-shadow: none;
+    }
+
+    .btn-regresar:hover,
+    .btn-regresar:focus {
+      color: #e50914;
+      background-color: rgba(229, 9, 20, 0.15);
+      outline: none;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <a href="https://zinecia.github.io/Home/" class="btn-regresar" aria-label="Regresar" title="Regresar">
+  <i class="fas fa-arrow-left"></i>
+</a>
 
-<h1>Selecciona tu icono de usuario</h1>
-<div class="grid" id="iconContainer"></div>
+  </header>
 
-<script>
-const iconos = [
-  "https://i.pinimg.com/736x/be/63/5e/be635e844cf106b57ee689803dca58af.jpg",
-  "https://i.pinimg.com/736x/8d/2d/ad/8d2dad6e0b79cf69b3d4028869dabc34.jpg",
-  "https://i.pinimg.com/736x/a4/c6/5f/a4c65f709d4c0cb1b4329c12beb9cd78.jpg",
-  "https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg",
-  "https://i.pinimg.com/736x/b4/0b/51/b40b51418293936a6e0ad09ffa229cb7.jpg",
-  "https://i.pinimg.com/1200x/ec/74/7a/ec747a688a5d6232663caaf114bad1c3.jpg",
-  "https://i.pinimg.com/736x/4c/fb/ce/4cfbcef5bcaf7587b1df8cc82c28bc0d.jpg",
-  "https://i.pinimg.com/1200x/05/80/4d/05804d23919f20ad798f06f41d80dc99.jpg"
-];
+  <h1>Selecciona tu icono de usuario</h1>
+  <div class="grid" id="iconContainer"></div>
 
-const container = document.getElementById('iconContainer');
-const iconoGuardado = localStorage.getItem('iconoUsuario');
+  <div class="toast" id="toast">¡Icono guardado con éxito!</div>
 
-function renderIconos() {
-  container.innerHTML = '';
-  iconos.forEach(url => {
-    const img = document.createElement('img');
-    img.src = url;
-    img.alt = "Icono usuario";
-    img.className = "icono";
-    if (url === iconoGuardado) img.classList.add('selected');
-    img.addEventListener('click', () => {
-      localStorage.setItem('iconoUsuario', url);
-      renderIconos();
-      alert('Icono guardado correctamente!');
-    });
-    container.appendChild(img);
-  });
-}
+  <script>
+    const iconos = [
+      "https://i.pinimg.com/736x/be/63/5e/be635e844cf106b57ee689803dca58af.jpg",
+      "https://i.pinimg.com/736x/8d/2d/ad/8d2dad6e0b79cf69b3d4028869dabc34.jpg",
+      "https://i.pinimg.com/736x/a4/c6/5f/a4c65f709d4c0cb1b4329c12beb9cd78.jpg",
+      "https://i.pinimg.com/736x/91/86/1b/91861b749841221d52122f0c2933d8a6.jpg",
+      "https://i.pinimg.com/736x/b4/0b/51/b40b51418293936a6e0ad09ffa229cb7.jpg",
+      "https://i.pinimg.com/1200x/ec/74/7a/ec747a688a5d6232663caaf114bad1c3.jpg",
+      "https://i.pinimg.com/736x/4c/fb/ce/4cfbcef5bcaf7587b1df8cc82c28bc0d.jpg",
+      "https://i.pinimg.com/1200x/05/80/4d/05804d23919f20ad798f06f41d80dc99.jpg",
+    ];
 
-renderIconos();
-</script>
+    const container = document.getElementById("iconContainer");
+    const toast = document.getElementById("toast");
 
+    function mostrarToast() {
+      toast.style.display = "block";
+      setTimeout(() => {
+        toast.style.display = "none";
+      }, 3000);
+    }
+
+    function renderIconos() {
+      const iconoGuardado = localStorage.getItem("iconoUsuario");
+      container.innerHTML = "";
+      iconos.forEach((url) => {
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "Icono usuario";
+        img.className = "icono";
+        if (url === iconoGuardado) {
+          img.classList.add("selected");
+        }
+        img.addEventListener("click", () => {
+          localStorage.setItem("iconoUsuario", url);
+          renderIconos();
+          mostrarToast();
+        });
+        container.appendChild(img);
+      });
+    }
+
+    renderIconos();
+  </script>
 </body>
 </html>
